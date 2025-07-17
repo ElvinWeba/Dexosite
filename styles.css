@@ -932,14 +932,61 @@ section {
     transform: translateY(0);
 }
 
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
 /* Mobile Menu Styles */
 @media (max-width: 768px) {
+    /* Fix header positioning and make it more stable */
+    .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(224, 224, 224, 0.5);
+        z-index: 1000;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .nav {
+        height: 70px;
+        padding: 0.5rem 0;
+    }
+    
+    .logo {
+        margin-left: 0;
+        height: 45px;
+    }
+    
+    .logo-image {
+        height: 120px;
+    }
+    
     .nav-menu {
         position: fixed;
         top: 70px;
         left: 0;
         right: 0;
-        background: #F9F9F9;
+        background: rgba(249, 249, 249, 0.98);
+        backdrop-filter: blur(16px);
         flex-direction: column;
         padding: 2rem;
         transform: translateY(-100%);
@@ -947,12 +994,14 @@ section {
         visibility: hidden;
         transition: all 0.3s ease;
         z-index: 999;
+        border-bottom: 1px solid rgba(224, 224, 224, 0.3);
     }
     
     .nav-menu.active {
         transform: translateY(0);
         opacity: 1;
         visibility: visible;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     }
     
     .nav-menu a {
@@ -960,6 +1009,7 @@ section {
         border-bottom: 1px solid #E0E0E0;
         text-align: center;
         font-size: 1.1rem;
+        font-weight: 600;
     }
     
     .nav-menu a:last-child {
@@ -968,6 +1018,7 @@ section {
     
     .mobile-menu-btn {
         display: flex;
+        z-index: 1001;
     }
     
     .mobile-menu-btn.active span:nth-child(1) {
@@ -978,15 +1029,52 @@ section {
         opacity: 0;
     }
     
-         .mobile-menu-btn.active span:nth-child(3) {
-         transform: rotate(45deg) translate(-5px, -6px);
-     }    
+    .mobile-menu-btn.active span:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
+    }
+    
+    /* Hero section should fill the entire viewport */
+    .hero {
+        padding: 70px 0 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .hero-content {
+        padding: 2rem 0;
+    }
+    
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2.8rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .hero-title-line1 {
+        color: #0F0F0F;
+    }
+    
+    .hero-title-line2 {
+        color: #444;
+        font-size: 0.85em;
     }
     
     .hero-subtitle {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+    }
+    
+    .hero-cta {
+        margin-bottom: 2rem;
+    }
+    
+    /* Ensure sections below hero are properly spaced */
+    .services,
+    .why-us,
+    .pricing,
+    .contact {
+        margin-top: 0;
     }
     
     .section-title {
@@ -1048,35 +1136,26 @@ section {
     }
     
     section {
-        padding: 60px 0;
+        padding: 80px 0;
     }
     
+    /* Make sure hero section takes full height */
     .hero {
-        padding: 100px 0 60px;
-        min-height: 80vh;
-    }
-    
-    .hero-title {
-        font-size: 2.8rem;
-    }
-    
-    .hero-title-line1 {
-        color: #0F0F0F;
-    }
-    
-    .hero-title-line2 {
-        color: #444;
-        font-size: 0.85em;
-    }
-    
-    .hero-subtitle {
-        font-size: 1.2rem;
+        padding: 70px 0 40px;
+        min-height: 100vh;
     }
 }
 
 @media (max-width: 480px) {
+    /* Further optimize for smaller screens */
+    .hero {
+        padding: 70px 0 30px;
+        min-height: 100vh;
+    }
+    
     .hero-title {
         font-size: 2.2rem;
+        margin-bottom: 1.2rem;
     }
     
     .hero-title-line1 {
@@ -1090,10 +1169,12 @@ section {
     
     .hero-subtitle {
         font-size: 1.1rem;
+        margin-bottom: 1.8rem;
     }
     
-    .hero {
-        min-height: 70vh;
+    .hero-cta {
+        font-size: 1.1rem;
+        padding: 16px 32px;
     }
     
     .hero::before,

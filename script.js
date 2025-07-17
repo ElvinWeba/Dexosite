@@ -15,18 +15,60 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Mobile menu functionality
 const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
 const navMenu = document.querySelector('.nav-menu');
+const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+const body = document.body;
 
-mobileMenuBtn.addEventListener('click', () => {
+function toggleMobileMenu() {
     navMenu.classList.toggle('active');
     mobileMenuBtn.classList.toggle('active');
-});
+    mobileMenuOverlay.classList.toggle('active');
+    
+    // Prevent body scroll when menu is open
+    if (navMenu.classList.contains('active')) {
+        body.style.overflow = 'hidden';
+    } else {
+        body.style.overflow = '';
+    }
+}
+
+function closeMobileMenu() {
+    navMenu.classList.remove('active');
+    mobileMenuBtn.classList.remove('active');
+    mobileMenuOverlay.classList.remove('active');
+    body.style.overflow = '';
+}
+
+mobileMenuBtn.addEventListener('click', toggleMobileMenu);
 
 // Close mobile menu when clicking on a link
 document.querySelectorAll('.nav-menu a').forEach(link => {
-    link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        mobileMenuBtn.classList.remove('active');
-    });
+    link.addEventListener('click', closeMobileMenu);
+});
+
+// Close mobile menu when clicking on overlay
+mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (navMenu.classList.contains('active') && 
+        !navMenu.contains(e.target) && 
+        !mobileMenuBtn.contains(e.target)) {
+        closeMobileMenu();
+    }
+});
+
+// Close mobile menu on escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+        closeMobileMenu();
+    }
+});
+
+// Close mobile menu on resize to desktop
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+        closeMobileMenu();
+    }
 });
 
 // Scroll animations
