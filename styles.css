@@ -62,28 +62,26 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     justify-content: space-between;
     padding: 1rem 0;
+    height: 70px;
 }
 
-.logo h2 {
-    color: #D62828;
-    font-size: 1.5rem;
-    font-weight: 700;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    /* Prevent layout shift during font loading */
-    width: 120px;
-    height: 36px;
+.logo {
+    height: 50px;
+    overflow: hidden;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    /* Smooth font loading transition */
-    font-variation-settings: normal;
-    text-rendering: optimizeLegibility;
-    /* Minimize font shift by ensuring consistent sizing */
-    font-size-adjust: 0.5;
-    font-synthesis: none;
+    margin-left: -80px;
 }
 
-.header.scrolled .logo h2 {
+.logo-image {
+    height: 144px;
+    width: auto;
+    object-fit: contain;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: block;
+}
+
+.header.scrolled .logo-image {
     transform: scale(1.02);
 }
 
@@ -473,6 +471,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Sections */
 section {
     padding: 80px 0;
+    scroll-margin-top: 80px; /* Offset for fixed header */
 }
 
 .section-title {
@@ -667,19 +666,24 @@ section {
 }
 
 .pricing-card {
-    background: #F9F9F9;
-    padding: 2rem;
-    border-radius: 12px;
+    background: #FFFFFF;
+    padding: 2.5rem;
+    border-radius: 16px;
     border: 2px solid #E0E0E0;
     text-align: center;
     position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
 }
 
 .pricing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
 
 .pricing-card.featured {
     border-color: #D62828;
+    background: linear-gradient(135deg, #FFFFFF 0%, #FAFAFA 100%);
 }
 
 .pricing-badge {
@@ -696,13 +700,14 @@ section {
 }
 
 .pricing-header {
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
 }
 
 .pricing-header h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
     color: #0F0F0F;
+    font-weight: 600;
 }
 
 .pricing-description {
@@ -714,20 +719,23 @@ section {
 }
 
 .price {
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: 700;
     color: #D62828;
+    margin-bottom: 0.5rem;
 }
 
 .pricing-features {
     list-style: none;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
 }
 
 .pricing-features li {
-    padding: 0.5rem 0;
-    color: #666;
+    padding: 0.75rem 0;
+    color: #555;
     border-bottom: 1px solid #E0E0E0;
+    font-size: 0.95rem;
+    line-height: 1.5;
 }
 
 .pricing-features li:last-child {
