@@ -188,3 +188,158 @@ function typeWriter(element, text, speed = 100) {
 // Counter animations removed
 
 // Counter animations removed 
+
+// Mobile Services Carousel Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const carousel = document.querySelector('.services-carousel');
+    
+    // Only initialize carousel on mobile devices
+    if (carousel && window.innerWidth <= 768) {
+        const track = carousel.querySelector('.carousel-track');
+        const slides = carousel.querySelectorAll('.carousel-slide');
+        const prevBtn = carousel.querySelector('.carousel-btn-prev');
+        const nextBtn = carousel.querySelector('.carousel-btn-next');
+        const indicators = carousel.querySelectorAll('.carousel-indicator');
+        
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+        
+        // Initialize carousel
+        function initCarousel() {
+            updateCarousel();
+            updateIndicators();
+        }
+        
+        // Update carousel position
+        function updateCarousel() {
+            const translateX = -currentSlide * 100;
+            track.style.transform = `translateX(${translateX}%)`;
+        }
+        
+        // Update indicator states
+        function updateIndicators() {
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentSlide);
+            });
+        }
+        
+        // Go to specific slide
+        function goToSlide(slideIndex) {
+            currentSlide = slideIndex;
+            updateCarousel();
+            updateIndicators();
+        }
+        
+        // Go to next slide
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+            updateIndicators();
+        }
+        
+        // Go to previous slide
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+            updateIndicators();
+        }
+        
+        // Event listeners for navigation buttons
+        if (prevBtn) {
+            prevBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                prevSlide();
+            });
+        }
+        
+        if (nextBtn) {
+            nextBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                nextSlide();
+            });
+        }
+        
+        // Event listeners for indicators
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', function(e) {
+                e.preventDefault();
+                goToSlide(index);
+            });
+        });
+        
+        // Touch/swipe support for mobile
+        let startX = 0;
+        let endX = 0;
+        let isDragging = false;
+        
+        function handleTouchStart(e) {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+        }
+        
+        function handleTouchMove(e) {
+            if (!isDragging) return;
+            endX = e.touches[0].clientX;
+        }
+        
+        function handleTouchEnd() {
+            if (!isDragging) return;
+            
+            const diff = startX - endX;
+            const threshold = 50; // Minimum swipe distance
+            
+            if (Math.abs(diff) > threshold) {
+                if (diff > 0) {
+                    // Swipe left - next slide
+                    nextSlide();
+                } else {
+                    // Swipe right - previous slide
+                    prevSlide();
+                }
+            }
+            
+            isDragging = false;
+        }
+        
+        // Add touch event listeners
+        track.addEventListener('touchstart', handleTouchStart, { passive: true });
+        track.addEventListener('touchmove', handleTouchMove, { passive: true });
+        track.addEventListener('touchend', handleTouchEnd, { passive: true });
+        
+        // Keyboard navigation support
+        document.addEventListener('keydown', function(e) {
+            if (window.innerWidth <= 768) {
+                if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    prevSlide();
+                } else if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    nextSlide();
+                }
+            }
+        });
+        
+        // Initialize carousel
+        initCarousel();
+        
+        // Re-initialize on window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth <= 768) {
+                // Re-initialize if switching to mobile
+                if (!carousel.classList.contains('initialized')) {
+                    initCarousel();
+                    carousel.classList.add('initialized');
+                }
+            } else {
+                // Reset if switching to desktop
+                carousel.classList.remove('initialized');
+                currentSlide = 0;
+                updateCarousel();
+                updateIndicators();
+            }
+        });
+        
+        // Mark as initialized
+        carousel.classList.add('initialized');
+    }
+}); 

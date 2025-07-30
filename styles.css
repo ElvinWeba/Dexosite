@@ -1240,3 +1240,256 @@ section {
         padding: 0.625rem 1.25rem;
     }
 } 
+
+/* Mobile Carousel Styles - Only visible on mobile */
+.services-carousel {
+    display: none;
+}
+
+/* Mobile Carousel Layout */
+@media (max-width: 768px) {
+    .services-grid {
+        display: none;
+    }
+    
+    .services-carousel {
+        display: block;
+        position: relative;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+    
+    .carousel-container {
+        position: relative;
+        overflow: hidden;
+        border-radius: 16px;
+        margin: 0 50px;
+    }
+    
+    .carousel-track {
+        display: flex;
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        width: 300%;
+    }
+    
+    .carousel-slide {
+        flex: 0 0 100%;
+        width: 100%;
+        padding: 0 10px;
+    }
+    
+    .service-card-mobile {
+        background: #FFFFFF;
+        border-radius: 16px;
+        padding: 2.5rem 2rem;
+        text-align: center;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(224, 224, 224, 0.3);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 400px;
+    }
+    
+    .service-icon-mobile {
+        margin-bottom: 1.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .service-icon-mobile img {
+        width: 80px;
+        height: 80px;
+        object-fit: contain;
+        filter: brightness(0) saturate(100%) invert(15%) sepia(100%) saturate(3000%) hue-rotate(350deg) brightness(0.8) contrast(1.2);
+    }
+    
+    .service-card-mobile h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #0F0F0F;
+        margin-bottom: 1rem;
+        line-height: 1.3;
+    }
+    
+    .service-card-mobile p {
+        color: #666;
+        line-height: 1.6;
+        font-size: 1rem;
+        text-align: center;
+        margin: 0;
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+    }
+    
+    /* Carousel Navigation Buttons */
+    .carousel-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #FFFFFF;
+        border: 2px solid #E0E0E0;
+        border-radius: 50%;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 10;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+    
+    .carousel-btn:hover {
+        background: #D62828;
+        border-color: #D62828;
+        color: #FFFFFF;
+        transform: translateY(-50%) scale(1.1);
+        box-shadow: 0 6px 20px rgba(214, 40, 40, 0.3);
+    }
+    
+    .carousel-btn:active {
+        transform: translateY(-50%) scale(0.95);
+    }
+    
+    .carousel-btn svg {
+        width: 20px;
+        height: 20px;
+        color: #666;
+        transition: color 0.3s ease;
+    }
+    
+    .carousel-btn:hover svg {
+        color: #FFFFFF;
+    }
+    
+    .carousel-btn-prev {
+        left: -24px;
+    }
+    
+    .carousel-btn-next {
+        right: -24px;
+    }
+    
+    /* Carousel Indicators */
+    .carousel-indicators {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 2rem;
+    }
+    
+    .carousel-indicator {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #E0E0E0;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        padding: 0;
+    }
+    
+    .carousel-indicator:hover {
+        background: #D62828;
+        transform: scale(1.2);
+    }
+    
+    .carousel-indicator.active {
+        background: #D62828;
+        transform: scale(1.2);
+    }
+    
+    /* Smooth transitions for carousel */
+    .carousel-track {
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    /* Touch-friendly improvements */
+    .carousel-btn {
+        min-width: 48px;
+        min-height: 48px;
+        touch-action: manipulation;
+    }
+    
+    .carousel-indicator {
+        min-width: 12px;
+        min-height: 12px;
+        touch-action: manipulation;
+    }
+}
+
+/* Smaller mobile screens */
+@media (max-width: 480px) {
+    .services-carousel {
+        padding: 0 15px;
+    }
+    
+    .carousel-container {
+        margin: 0 40px;
+    }
+    
+    .service-card-mobile {
+        padding: 2rem 1.5rem;
+        min-height: 350px;
+    }
+    
+    .service-card-mobile h3 {
+        font-size: 1.3rem;
+    }
+    
+    .service-card-mobile p {
+        font-size: 0.95rem;
+    }
+    
+    .carousel-btn {
+        width: 44px;
+        height: 44px;
+    }
+    
+    .carousel-btn-prev {
+        left: -22px;
+    }
+    
+    .carousel-btn-next {
+        right: -22px;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 360px) {
+    .carousel-container {
+        margin: 0 35px;
+    }
+    
+    .service-card-mobile {
+        padding: 1.5rem 1rem;
+        min-height: 320px;
+    }
+    
+    .service-card-mobile h3 {
+        font-size: 1.2rem;
+    }
+    
+    .service-card-mobile p {
+        font-size: 0.9rem;
+    }
+    
+    .carousel-btn {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .carousel-btn-prev {
+        left: -20px;
+    }
+    
+    .carousel-btn-next {
+        right: -20px;
+    }
+} 
